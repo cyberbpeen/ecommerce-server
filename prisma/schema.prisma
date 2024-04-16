@@ -7,12 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model category {
+  id String @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title     String @unique  @db.VarChar(255)
+  description   String?
+  status Boolean @default(true)
+}
+
 model brand {
   id String @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   title     String @unique  @db.VarChar(255)
-  descriptions   String?
+  description   String?
   status Boolean @default(true)
 }
