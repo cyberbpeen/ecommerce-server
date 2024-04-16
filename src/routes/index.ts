@@ -1,4 +1,11 @@
 import { Router } from "express";
+import {
+  addBrand,
+  getBrandById,
+  getAllBrand,
+  updateBrand,
+  deleteBrand,
+} from "../controllers";
 
 const router = Router();
 
@@ -6,5 +13,11 @@ const router = Router();
 router.get("/", (req, res) => {
   return res.status(200).json("Hello From Server Side.");
 });
+// Brand Routes
+router.post("/brands", addBrand);
+router.get("/brands/:id", getBrandById);
+router.get("/brands", getAllBrand);
+router.put("/brands/:id", updateBrand);
+router.delete("/brands/:id", deleteBrand);
 
 export default router;
