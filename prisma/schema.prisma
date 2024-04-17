@@ -7,22 +7,71 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model category {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model product {
+  id            String @id @default(uuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  title     String @unique  @db.VarChar(255)
+  title         String @unique  @db.VarChar(255)
   description   String?
-  status Boolean @default(true)
+  price         Decimal @db.Decimal(10,2)
+  discount      Decimal? @db.Decimal(10,2)
+  status        Boolean @default(false)
+
+  categoriesId  String
+  category      category   @relation(fields: [categoriesId], references: [id])
+
+  brandId       String
+  brand         brand @relation(fields: [brandId], references: [id])
+
+  colors        color[]
+  sizes         size[]
+}
+
+model color {
+  id            String @id @default(uuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  name          String  
+  status        Boolean @default(true)
+
+  productId     String
+  product       product @relation(fields: [productId],references: [id])
+}
+
+model size {
+  id            String @id @default(uuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  unit          String   
+  status        Boolean @default(true)
+
+  productId     String
+  product       product @relation(fields: [productId],references: [id])
+}
+
+model category {
+  id            String @id @default(uuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  title         String @unique  @db.VarChar(255)
+  description   String?
+  status        Boolean @default(false)
+
+  products      product[]
 }
 
 model brand {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id            String @id @default(uuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  title     String @unique  @db.VarChar(255)
+  title         String @unique  @db.VarChar(255)
   description   String?
-  status Boolean @default(true)
+  status        Boolean @default(false)
+  
+  products      product[]
 }

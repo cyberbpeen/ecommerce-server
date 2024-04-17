@@ -26,6 +26,7 @@ export const getCategoryById = async (
       where: {
         id: req.params.id,
       },
+      include: { products: true },
     });
     return res.sendResponse(category);
   } catch (err) {
@@ -47,6 +48,7 @@ export const getAllCategories = async (
       orderBy: {
         createdAt: "desc",
       },
+      include: { products: true },
     });
     return res.sendResponse(categories);
   } catch (e) {

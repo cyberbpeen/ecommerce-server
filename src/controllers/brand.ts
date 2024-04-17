@@ -26,6 +26,7 @@ export const getBrandById = async (
       where: {
         id: req.params.id,
       },
+      include: { products: true },
     });
     return res.sendResponse(brand);
   } catch (err) {
@@ -47,6 +48,7 @@ export const getAllBrand = async (
       orderBy: {
         createdAt: "desc",
       },
+      include: { products: true },
     });
     return res.sendResponse(brands);
   } catch (e) {

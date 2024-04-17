@@ -12,8 +12,21 @@ import {
   updateCategory,
   deleteCategory,
 } from "./category";
+import {
+  addProduct,
+  getProductById,
+  getAllProducts,
+  updateProduct,
+  deleteProduct,
+} from "./product";
 
 export {
+  // Product
+  addProduct,
+  getProductById,
+  getAllProducts,
+  updateProduct,
+  deleteProduct,
   // Brands
   addBrand,
   getBrandById,

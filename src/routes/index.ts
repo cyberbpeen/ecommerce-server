@@ -1,5 +1,10 @@
 import { Router } from "express";
 import {
+  addProduct,
+  getProductById,
+  getAllProducts,
+  updateProduct,
+  deleteProduct,
   addCategory,
   getCategoryById,
   getAllCategories,
@@ -19,14 +24,21 @@ router.get("/", (req, res) => {
   return res.status(200).json("Hello From Server Side.");
 });
 
-// Brand Routes
+// Products Routes
+router.post("/products", addProduct);
+router.get("/products/:id", getProductById);
+router.get("/products", getAllProducts);
+router.put("/products/:id", updateProduct);
+router.delete("/products/:id", deleteProduct);
+
+// Categories Routes
 router.post("/categories", addCategory);
 router.get("/categories/:id", getCategoryById);
 router.get("/categories", getAllCategories);
 router.put("/categories/:id", updateCategory);
 router.delete("/categories/:id", deleteCategory);
 
-// Brand Routes
+// Brands Routes
 router.post("/brands", addBrand);
 router.get("/brands/:id", getBrandById);
 router.get("/brands", getAllBrand);
