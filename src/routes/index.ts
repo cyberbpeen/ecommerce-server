@@ -1,21 +1,8 @@
 import { Router } from "express";
-import {
-  addProduct,
-  getProductById,
-  getAllProducts,
-  updateProduct,
-  deleteProduct,
-  addCategory,
-  getCategoryById,
-  getAllCategories,
-  updateCategory,
-  deleteCategory,
-  addBrand,
-  getBrandById,
-  getAllBrand,
-  updateBrand,
-  deleteBrand,
-} from "../controllers";
+import userRoute from "./user-route";
+import productRoute from "./product-route";
+import brandRoute from "./brand-route";
+import categoryRoute from "./category-route";
 
 const router = Router();
 
@@ -24,25 +11,16 @@ router.get("/", (req, res) => {
   return res.status(200).json("Hello From Server Side.");
 });
 
+// User Routes
+router.use("", userRoute);
+
 // Products Routes
-router.post("/products", addProduct);
-router.get("/products/:id", getProductById);
-router.get("/products", getAllProducts);
-router.put("/products/:id", updateProduct);
-router.delete("/products/:id", deleteProduct);
+router.use("/products", productRoute);
 
 // Categories Routes
-router.post("/categories", addCategory);
-router.get("/categories/:id", getCategoryById);
-router.get("/categories", getAllCategories);
-router.put("/categories/:id", updateCategory);
-router.delete("/categories/:id", deleteCategory);
+router.use("/categories", categoryRoute);
 
 // Brands Routes
-router.post("/brands", addBrand);
-router.get("/brands/:id", getBrandById);
-router.get("/brands", getAllBrand);
-router.put("/brands/:id", updateBrand);
-router.delete("/brands/:id", deleteBrand);
+router.use("/brands", brandRoute);
 
 export default router;
